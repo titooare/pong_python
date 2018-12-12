@@ -6,32 +6,34 @@ sense=SenseHat()
 
 sense.clear()
 
-x = 0
+# initialisation du demarage du jeu
+x = 2
+y = 5
+x_sens = 1
+y_sens = 1
 
-y = 0
-
-while x >0 and y >0 or x < 7 and y < 7:
-
-  while x < 7 and y < 7 :
-    x = x + 1
-    y = y + 1
-  
+def balle():
+  global x, y, x_sens, y_sens
+  x = x + x_sens
+  y = y + y_sens
+  sense.set_pixel(x, y, 255, 0, 0)
  
-  
-  
-    sense.clear()
-    sense.set_pixel(x, y, 255, 0, 0)
-    sleep(0.10)
-  
-  
-
-  while x >0 and y >0:
-    x = x - 1
-    y = y - 1
-  
+  if x == 0:
+    x_sens = 1
  
+  if x == 7:
+    x_sens = -1
+  if y == 7:
+    y_sens = -1
+  elif y == 0:
+    y_sens = 1
+    
+          
+        
+          
   
-  
-    sense.clear()
-    sense.set_pixel(x, y, 255, 0, 0)
-    sleep(0.10)
+while True:
+  sense.clear()
+  balle()
+  sleep(0.10)
+ 
